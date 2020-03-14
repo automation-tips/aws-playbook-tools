@@ -1,0 +1,4 @@
+my_vars:
+  # AWSに登録したキーペア名を入力
+  ec2:
+    key_name: XXXXXXXXXXXXX

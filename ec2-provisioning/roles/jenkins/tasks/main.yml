@@ -1,0 +1,22 @@
+- name: "Start jenkins server"
+  service:
+    name: jenkins
+    state: started
+    enabled: yes
+
+- name: "Pause 60 seconds ..."
+  pause:
+    seconds: 60
+  register: result
+- name: show result
+  debug:
+    var: result
+
+- name: "show /var/lib/jenkins/secrets/initialAdminPassword"
+  slurp:
+    path: /var/lib/jenkins/secrets/initialAdminPassword
+  register: slurp_file
+
+- name: "Password ↓"
+  debug:
+    msg: "{{ slurp_file.content | b64decode | regex_replace('\n', '') }}"

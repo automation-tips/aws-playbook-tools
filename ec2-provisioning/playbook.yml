@@ -7,10 +7,10 @@
   tasks:
     - name: Refresh inventory
       meta: refresh_inventory
-# - name: build jenkins
-#   hosts: tag_Name_Jenkins
-#   user: ec2-user
-#   become: True
-#   gather_facts: true
-#   roles:
-#     - jenkins
+- name: build jenkins
+  hosts: tag_role_Jenkins
+  user: ec2-user
+  become: True
+  gather_facts: true
+  roles:
+    - jenkins

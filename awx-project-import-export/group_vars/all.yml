@@ -1,7 +1,7 @@
 tower:
-  host: localhost
+  host: http://xxx.xxx.xxx.xxx
   username: admin
   password: password
 
 # ansible-tower-cli をインストールした環境
-ansible_python_interpreter: /usr/bin/python
+ansible_python_interpreter: /Users/kento/.pyenv/shims/python

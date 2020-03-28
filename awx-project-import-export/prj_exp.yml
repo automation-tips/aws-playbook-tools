@@ -1,0 +1,20 @@
+- hosts: tower
+  gather_facts: no
+  connection: local
+
+  tasks:
+    - name: export all project
+      # ↓ https://docs.ansible.com/ansible/latest/modules/tower_receive_module.html
+      tower_receive:
+        validate_certs: no
+        tower_host: "{{ tower.host }}"
+        tower_username: "{{ tower.username }}"
+        tower_password: "{{ tower.password }}"
+        project:
+          - all
+      register: result
+
+    - name: save project
+      copy:
+        content: "{{ result.assets | to_nice_yaml }}"
+        dest: project_data.yml

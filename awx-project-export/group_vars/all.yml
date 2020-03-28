@@ -1,3 +1,7 @@
 tower:
+  host: localhost
   username: admin
   password: password
+
+# ansible-tower-cli をインストールした環境
+ansible_python_interpreter: /usr/bin/python

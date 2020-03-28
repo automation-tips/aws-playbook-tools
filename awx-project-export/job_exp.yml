@@ -1,0 +1,24 @@
+- hosts: tower
+  gather_facts: no
+  connection: local
+
+  vars:
+    # ansible-tower-cli をインストールした環境
+    ansible_python_interpreter: /usr/bin/python
+
+  tasks:
+    - name: export job
+      # ↓ https://docs.ansible.com/ansible/latest/modules/tower_receive_module.html
+      tower_receive:
+        tower_host: "{{ ansible_host }}"
+        tower_username: "{{ tower.username }}" # 別途定義した認証情報
+        tower_password: "{{ tower.password }}" # 別途定義した認証情報
+        validate_certs: no
+        job_template:
+          - testjob1
+      register: result
+
+    - name: save job
+      copy:
+        content: "{{ result.assets | to_nice_yaml }}"
+        dest: job_data.yml
